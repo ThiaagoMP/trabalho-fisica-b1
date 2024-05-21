@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'br.com.thiaago'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    mainClassName = 'br.com.thiaago.fisica.trabalho.b1.Main'
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
+
+}
+
+jar {
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    manifest {
+        attributes(
+                'Implementation-Title': 'fisica-trabalho-b1',
+                "Main-Class": "br.com.thiaago.fisica.trabalho.b1.Main"
+        )
+    }
+    destinationDirectory = file("/home/thiago/Documentos/Trabalho 2° Ano/Física/1° Bimestre")
+    archivesBaseName = 'Fisica'
+}
+
+test {
+    useJUnitPlatform()
+}
